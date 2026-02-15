@@ -12,22 +12,6 @@ import {
 import * as THREE from "three";
 import { Connection as ConnectionType } from "@/types/network";
 
-/**
- * DataFlowParticles - Animated particles that flow through connections
- *
- * THREE.JS CONCEPTS:
- * - Points: Efficient way to render many small objects (particles)
- * - PointsMaterial: Material specifically for point rendering
- * - BufferAttribute: Direct GPU buffer manipulation for performance
- */
-
-interface DataFlowParticlesProps {
-  connections: ConnectionType[];
-  neuronPositions: Map<string, [number, number, number]>;
-  speed?: number;
-  particlesPerConnection?: number;
-}
-
 interface Particle {
   connectionIndex: number;
   progress: number;
@@ -39,7 +23,12 @@ export default function DataFlowParticles({
   neuronPositions,
   speed = 1,
   particlesPerConnection = 3,
-}: DataFlowParticlesProps) {
+}: {
+  connections: ConnectionType[];
+  neuronPositions: Map<string, [number, number, number]>;
+  speed?: number;
+  particlesPerConnection?: number;
+}) {
   const pointsRef = useRef<Points>(null);
 
   // Filter only active connections

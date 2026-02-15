@@ -42,10 +42,10 @@ export default function Scene() {
     getOverviewCamera,
   } = useLayerFocus();
 
-  const handleModelLoaded = (
+  function handleModelLoaded(
     architecture: TFLayerInfo[],
     model: tf.LayersModel
-  ) => {
+  ) {
     setTFArchitecture(architecture);
     setTFModel(model);
 
@@ -60,11 +60,11 @@ export default function Scene() {
 
     setNetwork(tfNetwork);
     setUseRealModel(true);
-  };
-  const handleImageProcessed = async (
+  }
+  async function handleImageProcessed(
     image: HTMLImageElement,
     imageUrl: string
-  ) => {
+  ) {
     if (!tfModel) return;
 
     setIsInferencing(true);
@@ -87,7 +87,7 @@ export default function Scene() {
     } finally {
       setTimeout(() => setIsInferencing(false), 3000);
     }
-  };
+  }
   // Generate network
   useEffect(() => {
     const generatedNetwork = generateNetwork(
